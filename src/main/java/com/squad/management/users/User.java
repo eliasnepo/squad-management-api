@@ -15,22 +15,50 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String name;
+    @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
+    @Column(nullable = false)
+    private String displayName;
+    @Column(nullable = false)
+    private String avatarUrl;
+    @Column(nullable = false)
+    private String location;
 
     /* Necessary because of JPA reflection */
     public User() {}
 
-    public User(Long id, String name) {
+    public User(Long id, String firstName, String lastName, String displayName, String avatarUrl, String location) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.displayName = displayName;
+        this.avatarUrl = avatarUrl;
+        this.location = location;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public String getLocation() {
+        return location;
     }
 }
