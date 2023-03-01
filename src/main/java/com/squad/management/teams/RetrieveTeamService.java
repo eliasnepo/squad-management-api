@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RetrieveTeamService {
@@ -27,7 +28,7 @@ public class RetrieveTeamService {
     }
 
     @Transactional(readOnly = true)
-    public TeamResponse getTeamById(Long id) {
+    public TeamResponse getTeamById(UUID id) {
         return repository
                 .findById(id)
                 .map(TeamResponse::fromDomain)

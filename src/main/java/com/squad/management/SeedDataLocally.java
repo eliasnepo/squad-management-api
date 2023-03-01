@@ -36,12 +36,15 @@ public class SeedDataLocally {
         ).forEach(userRepository::save);
 
         /* Seed Data for teams */
-        Stream.of(
-                new Team(null, "Product A", null, null),
-                new Team(null, "Product B", null, null),
-                new Team(null, "Product C", null, null),
-                new Team(null, "Product D", null, null),
-                new Team(null, "Product E", null, null)
-        ).forEach(teamRepository::save);
+//        Stream.of(
+//                new Team(null, "Product A", null, null),
+//                new Team(null, "Product B", null, null),
+//                new Team(null, "Product C", null, null),
+//                new Team(null, "Product D", null, null),
+//                new Team(null, "Product E", null, null)
+//        ).forEach(team ->
+//                    teamRepository
+//                        .findByName(team.getName())
+//                        .orElse(teamRepository.save(team)));
     }
 }
