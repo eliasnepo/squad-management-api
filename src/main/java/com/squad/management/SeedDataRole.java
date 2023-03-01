@@ -20,9 +20,9 @@ public class SeedDataRole {
     private void init() {
         Stream
             .of(
-                new Role(1L, "DEVELOPER"),
-                new Role(2L, "PRODUCT_OWNER"),
-                new Role(3L, "TESTER"))
+                new Role(1L, "Developer"),
+                new Role(2L, "Product Owner"),
+                new Role(3L, "Tester"))
             .forEach(role ->
                 roleRepository
                     .findById(role.getId())
