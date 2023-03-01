@@ -4,6 +4,7 @@ import com.squad.management.exceptions.ResourceNotFoundException;
 import com.squad.management.users.dto.ListUsersResponse;
 import com.squad.management.users.dto.UserResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class RetrieveUserService {
         this.repository = repository;
     }
 
+    @Transactional(readOnly = true)
     public List<ListUsersResponse> listUsers() {
         return repository
                 .findAll()
@@ -24,6 +26,7 @@ public class RetrieveUserService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public UserResponse getUserById(Long id) {
         return repository
                 .findById(id)

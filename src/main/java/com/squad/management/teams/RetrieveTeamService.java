@@ -4,6 +4,7 @@ import com.squad.management.exceptions.ResourceNotFoundException;
 import com.squad.management.teams.dto.ListTeamsResponse;
 import com.squad.management.teams.dto.TeamResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class RetrieveTeamService {
         this.repository = repository;
     }
 
+    @Transactional(readOnly = true)
     public List<ListTeamsResponse> listTeams() {
         return repository
                 .findAll()
@@ -24,6 +26,7 @@ public class RetrieveTeamService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public TeamResponse getTeamById(Long id) {
         return repository
                 .findById(id)
