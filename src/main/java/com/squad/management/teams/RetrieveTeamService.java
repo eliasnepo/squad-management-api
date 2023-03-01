@@ -28,7 +28,7 @@ public class RetrieveTeamService {
     }
 
     @Transactional(readOnly = true)
-    public TeamResponse getTeamById(UUID id) {
+    public TeamResponse getTeamById(Long id) {
         return repository
                 .findById(id)
                 .map(TeamResponse::fromDomain)

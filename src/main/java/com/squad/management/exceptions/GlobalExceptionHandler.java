@@ -47,6 +47,20 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(status).body(error);
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<StandardError> entityNotFound(IllegalStateException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                "Illegal operation",
+                e.getMessage(),
+                request.getRequestURI());
+
+        return ResponseEntity.status(status).body(err);
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<StandardError> entityNotFound(HttpMessageNotReadableException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

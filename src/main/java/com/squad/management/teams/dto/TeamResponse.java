@@ -1,21 +1,24 @@
 package com.squad.management.teams.dto;
 
+import com.squad.management.memberships.Membership;
 import com.squad.management.teams.Team;
+import com.squad.management.users.User;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
 public record TeamResponse(
-        UUID id,
+        Long id,
         String name,
-        UUID teamLeadId,
-        List<UUID> teamMemberIds
+        Long teamLeadId,
+        List<Long> teamMemberIds
 ) {
     public static TeamResponse fromDomain(Team team) {
         return new TeamResponse(
                 team.getId(),
                 team.getName(),
-                team.getTeamLead().getId(),
+                team.getTeamLead() != null ? team.getTeamLead().getId() : null,
                 team.getMemberships().stream().map(member -> member.getUser().getId()).toList()
         );
     }

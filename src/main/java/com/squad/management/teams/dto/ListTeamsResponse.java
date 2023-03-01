@@ -5,7 +5,7 @@ import com.squad.management.teams.Team;
 import java.util.UUID;
 
 public record ListTeamsResponse(
-        UUID id,
+        Long id,
         String name
 ) {
     public static ListTeamsResponse fromDomain(Team team) {

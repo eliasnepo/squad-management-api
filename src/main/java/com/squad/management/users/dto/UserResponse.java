@@ -5,7 +5,7 @@ import com.squad.management.users.User;
 import java.util.UUID;
 
 public record UserResponse(
-        UUID id,
+        Long id,
         String firstName,
         String lastName,
         String displayName,

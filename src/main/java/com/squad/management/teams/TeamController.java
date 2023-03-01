@@ -26,7 +26,7 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public TeamResponse getTeamById(@PathVariable UUID id) {
+    public TeamResponse getTeamById(@PathVariable Long id) {
         return retrieveTeamService.getTeamById(id);
     }
 }

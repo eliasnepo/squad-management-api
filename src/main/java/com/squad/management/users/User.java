@@ -2,15 +2,13 @@ package com.squad.management.users;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
-
 @Entity
 @Table(name = "tb_users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private String firstName;
@@ -26,7 +24,7 @@ public class User {
     /* Necessary because of JPA reflection */
     public User() {}
 
-    public User(UUID id, String firstName, String lastName, String displayName, String avatarUrl, String location) {
+    public User(Long id, String firstName, String lastName, String displayName, String avatarUrl, String location) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,7 +33,7 @@ public class User {
         this.location = location;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

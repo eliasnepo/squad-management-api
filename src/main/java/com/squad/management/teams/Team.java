@@ -13,8 +13,8 @@ import java.util.UUID;
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -28,14 +28,14 @@ public class Team {
     /* Necessary because of JPA reflection */
     public Team() {}
 
-    public Team(UUID id, String name, User teamLead, Set<Membership> memberships) {
+    public Team(Long id, String name, User teamLead, Set<Membership> memberships) {
         this.id = id;
         this.name = name;
         this.teamLead = teamLead;
         this.memberships = memberships;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

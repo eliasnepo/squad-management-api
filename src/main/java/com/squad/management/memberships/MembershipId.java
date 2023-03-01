@@ -9,10 +9,10 @@ import java.util.UUID;
 public class MembershipId {
 
     @Column(name = "user_id")
-    private UUID userId;
+    private Long userId;
 
     @Column(name = "team_id")
-    private UUID teamId;
+    private Long teamId;
 
     @Column(name = "role_id")
     private Long roleId;
@@ -20,17 +20,17 @@ public class MembershipId {
     /* Necessary because of JPA reflection */
     public MembershipId() {}
 
-    public MembershipId(UUID userId, UUID teamId, Long roleId) {
+    public MembershipId(Long userId, Long teamId, Long roleId) {
         this.userId = userId;
         this.teamId = teamId;
         this.roleId = roleId;
     }
 
-    public UUID getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public UUID getTeamId() {
+    public Long getTeamId() {
         return teamId;
     }
 
