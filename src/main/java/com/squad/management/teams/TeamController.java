@@ -28,8 +28,9 @@ public class TeamController {
         return retrieveTeamService.getTeamById(id);
     }
 
-    @PostMapping("/{id}/assign-user/{userId}")
-    public void assignUser(@PathVariable Long id, @PathVariable Long userId) {
-        assignUserService.assignUserToTeam(id, userId);
+    @PostMapping("/{teamId}/assign-user/{userId}")
+    public void assignUser(@PathVariable Long teamId, @PathVariable Long userId) {
+        assignUserService.assignUserToTeam(teamId, userId);
     }
+
 }
