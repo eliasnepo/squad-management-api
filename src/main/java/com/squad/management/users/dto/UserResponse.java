@@ -2,8 +2,10 @@ package com.squad.management.users.dto;
 
 import com.squad.management.users.User;
 
+import java.util.UUID;
+
 public record UserResponse(
-        Long id,
+        UUID id,
         String firstName,
         String lastName,
         String displayName,

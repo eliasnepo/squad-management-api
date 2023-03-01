@@ -3,12 +3,13 @@ package com.squad.management.teams.dto;
 import com.squad.management.teams.Team;
 
 import java.util.List;
+import java.util.UUID;
 
 public record TeamResponse(
-        Long id,
+        UUID id,
         String name,
-        Long teamLeadId,
-        List<Long> teamMemberIds
+        UUID teamLeadId,
+        List<UUID> teamMemberIds
 ) {
     public static TeamResponse fromDomain(Team team) {
         return new TeamResponse(
