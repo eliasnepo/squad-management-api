@@ -16,10 +16,12 @@ public class RoleController {
 
     private final CreateRoleService createRoleService;
     private final LookUpRoleService lookUpRoleService;
+    private final AssignRoleService assignRoleService;
 
-    public RoleController(CreateRoleService createRoleService, LookUpRoleService lookUpRoleService) {
+    public RoleController(CreateRoleService createRoleService, LookUpRoleService lookUpRoleService, AssignRoleService assignRoleService) {
         this.createRoleService = createRoleService;
         this.lookUpRoleService = lookUpRoleService;
+        this.assignRoleService = assignRoleService;
     }
 
     @PostMapping
@@ -43,5 +45,10 @@ public class RoleController {
     @GetMapping("/{roleId}/memberships")
     public Set<MembershipResponse> lookUpMembershipsForARole(@PathVariable Long roleId) {
         return lookUpRoleService.lookUpMembershipsForARole(roleId);
+    }
+
+    @PostMapping("/{roleId}/user/{userId}/team/{teamId}/assign")
+    public MembershipResponse assignUser(@PathVariable Long roleId, @PathVariable Long userId, @PathVariable Long teamId) {
+        return assignRoleService.assignRoleToUser(roleId, userId, teamId);
     }
 }
