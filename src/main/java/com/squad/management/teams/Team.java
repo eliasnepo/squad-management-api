@@ -28,6 +28,10 @@ public class Team {
     /* Necessary because of JPA reflection */
     public Team() {}
 
+    public Team(Long id) {
+        this.id = id;
+    }
+
     public Team(Long id, String name, User teamLead) {
         this.id = id;
         this.name = name;

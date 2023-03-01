@@ -1,17 +1,22 @@
 package com.squad.management;
 
+import com.squad.management.memberships.Membership;
+import com.squad.management.roles.Role;
 import com.squad.management.teams.Team;
 import com.squad.management.teams.TeamRepository;
 import com.squad.management.users.User;
 import com.squad.management.users.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @Component
+@DependsOn("seedDataRole")
 @ConditionalOnProperty(name = "spring.profiles.active", havingValue = "local")
 public class SeedDataLocally {
 
@@ -27,28 +32,34 @@ public class SeedDataLocally {
     private void init() {
         /* Seed Data for users */
         Stream.of(
-                new User(null, "John", "Doe", "jdoe", "https://github.com/profile.png", "United States"),
-                new User(null, "Maria", "Souza", "msouza", "https://github.com/profile.png", "Brazil"),
-                new User(null, "Elias", "Souza", "esouza", "https://github.com/profile.png", "Brazil"),
-                new User(null, "Joey", "Tribbiani", "jtrib", "https://github.com/profile.png", "United States"),
-                new User(null, "Ross", "Geller", "rgeller", "https://github.com/profile.png", "United States"),
-                new User(null, "Monica", "Geller", "mgeller", "https://github.com/profile.png", "United States"),
-                new User(null, "Rachel", "Green", "rgreen", "https://github.com/profile.png", "United States")
-        ).forEach(userRepository::save);
+                new User(1L, "John", "Doe", "jdoe", "https://github.com/profile.png", "United States"),
+                new User(2L, "Maria", "Souza", "msouza", "https://github.com/profile.png", "Brazil"),
+                new User(3L, "Elias", "Souza", "esouza", "https://github.com/profile.png", "Brazil"),
+                new User(4L, "Joey", "Tribbiani", "jtrib", "https://github.com/profile.png", "United States"),
+                new User(5L, "Ross", "Geller", "rgeller", "https://github.com/profile.png", "United States"),
+                new User(6L, "Monica", "Geller", "mgeller", "https://github.com/profile.png", "United States"),
+                new User(7L, "Rachel", "Green", "rgreen", "https://github.com/profile.png", "United States")
+        ).forEach(user -> {
+            if (!userRepository.existsById(user.getId())) {
+                userRepository.save(user);
+            }
+        });
 
         /* Seed Data for teams */
         Stream.of(
-                new Team(null, "Product A", null),
-                new Team(null, "Product B", null),
-                new Team(null, "Product C", null),
-                new Team(null, "Product D", null),
-                new Team(null, "Product E", null)
+                new Team(1L, "Product A", null),
+                new Team(2L, "Product B", new User(3L)),
+                new Team(3L, "Product C", null),
+                new Team(4L, "Product D", new User(6L)),
+                new Team(5L, "Product E", new User(7L))
         ).forEach(team -> {
-                    var optTeam = teamRepository.findByName(team.getName());
-                    if (optTeam.isEmpty()) {
-                        teamRepository.save(team);
-                    }
-                }
-        );
+            if (team.getTeamLead() != null) {
+                team.addMembership(new Membership(team.getTeamLead(), team, new Role(1L)));
+            }
+
+            if (!teamRepository.existsById(team.getId())) {
+                teamRepository.save(team);
+            }
+        });
     }
 }

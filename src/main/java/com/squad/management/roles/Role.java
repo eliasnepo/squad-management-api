@@ -15,6 +15,10 @@ public class Role {
     /* Necessary because of JPA reflection */
     public Role() {}
 
+    public Role(Long id) {
+        this.id = id;
+    }
+
     public Role(Long id, String name) {
         this.id = id;
         this.name = name;
