@@ -24,6 +24,15 @@ public class Membership {
     @MapsId("roleId")
     private Role role;
 
+    /* Necessary because of JPA reflection */
+    public Membership() {}
+
+    public Membership(User user, Team team, Role role) {
+        this.user = user;
+        this.team = team;
+        this.role = role;
+    }
+
     public MembershipId getId() {
         return id;
     }

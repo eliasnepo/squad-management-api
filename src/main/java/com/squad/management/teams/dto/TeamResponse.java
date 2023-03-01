@@ -1,12 +1,8 @@
 package com.squad.management.teams.dto;
 
-import com.squad.management.memberships.Membership;
 import com.squad.management.teams.Team;
-import com.squad.management.users.User;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 public record TeamResponse(
         Long id,
