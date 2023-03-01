@@ -28,11 +28,10 @@ public class Team {
     /* Necessary because of JPA reflection */
     public Team() {}
 
-    public Team(Long id, String name, User teamLead, Set<Membership> memberships) {
+    public Team(Long id, String name, User teamLead) {
         this.id = id;
         this.name = name;
         this.teamLead = teamLead;
-        this.memberships = memberships;
     }
 
     public Long getId() {
@@ -49,5 +48,9 @@ public class Team {
 
     public Set<Membership> getMemberships() {
         return memberships;
+    }
+
+    public void addMembership(Membership membership) {
+        this.memberships.add(membership);
     }
 }

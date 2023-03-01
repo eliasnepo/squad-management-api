@@ -9,7 +9,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
@@ -23,6 +22,10 @@ public class User {
 
     /* Necessary because of JPA reflection */
     public User() {}
+
+    public User(Long id) {
+        this.id = id;
+    }
 
     public User(Long id, String firstName, String lastName, String displayName, String avatarUrl, String location) {
         this.id = id;
