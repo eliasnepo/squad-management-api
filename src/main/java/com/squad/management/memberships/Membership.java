@@ -21,7 +21,6 @@ public class Membership {
     private Team team;
 
     @ManyToOne
-    @MapsId("roleId")
     private Role role;
 
     /* Necessary because of JPA reflection */

@@ -3,6 +3,7 @@ package com.squad.management.exceptions;
 import com.squad.management.exceptions.dto.StandardError;
 import com.squad.management.exceptions.dto.ValidationError;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -55,6 +56,19 @@ public class GlobalExceptionHandler {
                 Instant.now(),
                 status.value(),
                 "Illegal operation",
+                e.getMessage(),
+                request.getRequestURI());
+
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> entityNotFound(DataIntegrityViolationException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                "Database exception",
                 e.getMessage(),
                 request.getRequestURI());
 

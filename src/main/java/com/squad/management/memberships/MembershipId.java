@@ -14,16 +14,12 @@ public class MembershipId {
     @Column(name = "team_id")
     private Long teamId;
 
-    @Column(name = "role_id")
-    private Long roleId;
-
     /* Necessary because of JPA reflection */
     public MembershipId() {}
 
-    public MembershipId(Long userId, Long teamId, Long roleId) {
+    public MembershipId(Long userId, Long teamId) {
         this.userId = userId;
         this.teamId = teamId;
-        this.roleId = roleId;
     }
 
     public Long getUserId() {
@@ -32,9 +28,5 @@ public class MembershipId {
 
     public Long getTeamId() {
         return teamId;
-    }
-
-    public Long getRoleId() {
-        return roleId;
     }
 }
