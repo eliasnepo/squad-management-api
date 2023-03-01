@@ -3,9 +3,11 @@ package com.squad.management.users;
 import com.squad.management.exceptions.ResourceNotFoundException;
 import com.squad.management.users.dto.ListUsersResponse;
 import com.squad.management.users.dto.UserResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RetrieveUserService {
 
     private final UserRepository repository;
