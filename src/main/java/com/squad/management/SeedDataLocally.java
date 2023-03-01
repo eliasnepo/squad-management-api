@@ -8,6 +8,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Component
@@ -36,15 +37,18 @@ public class SeedDataLocally {
         ).forEach(userRepository::save);
 
         /* Seed Data for teams */
-//        Stream.of(
-//                new Team(null, "Product A", null, null),
-//                new Team(null, "Product B", null, null),
-//                new Team(null, "Product C", null, null),
-//                new Team(null, "Product D", null, null),
-//                new Team(null, "Product E", null, null)
-//        ).forEach(team ->
-//                    teamRepository
-//                        .findByName(team.getName())
-//                        .orElse(teamRepository.save(team)));
+        Stream.of(
+                new Team(null, "Product A", null),
+                new Team(null, "Product B", null),
+                new Team(null, "Product C", null),
+                new Team(null, "Product D", null),
+                new Team(null, "Product E", null)
+        ).forEach(team -> {
+                    var optTeam = teamRepository.findByName(team.getName());
+                    if (optTeam.isEmpty()) {
+                        teamRepository.save(team);
+                    }
+                }
+        );
     }
 }
