@@ -17,12 +17,12 @@ public class TeamController {
 
     private final RetrieveTeamService retrieveTeamService;
     private final AssignUserService assignUserService;
-    private final CreateTeamUserService createTeamUserService;
+    private final CreateTeamService createTeamService;
 
-    public TeamController(RetrieveTeamService retrieveTeamService, AssignUserService assignUserService, CreateTeamUserService createTeamUserService) {
+    public TeamController(RetrieveTeamService retrieveTeamService, AssignUserService assignUserService, CreateTeamService createTeamService) {
         this.retrieveTeamService = retrieveTeamService;
         this.assignUserService = assignUserService;
-        this.createTeamUserService = createTeamUserService;
+        this.createTeamService = createTeamService;
     }
 
     @GetMapping
@@ -42,7 +42,7 @@ public class TeamController {
 
     @PostMapping
     public ResponseEntity<TeamResponse> createTeam(@Valid @RequestBody CreateTeamRequest request) {
-        var team = createTeamUserService.createTeam(request);
+        var team = createTeamService.createTeam(request);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

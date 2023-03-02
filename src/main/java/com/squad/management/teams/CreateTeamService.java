@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CreateTeamUserService {
+public class CreateTeamService {
 
     private final TeamRepository teamRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public CreateTeamUserService(TeamRepository teamRepository, UserRepository userRepository, RoleRepository roleRepository) {
+    public CreateTeamService(TeamRepository teamRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.teamRepository = teamRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
