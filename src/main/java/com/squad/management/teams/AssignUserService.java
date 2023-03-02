@@ -23,9 +23,9 @@ public class AssignUserService {
     }
 
     @Transactional
-    public void assignUserToTeam(Long id, Long userId) {
-        var team = teamRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Team not found with id " + id));
+    public void assignUserToTeam(Long teamId, Long userId) {
+        var team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new ResourceNotFoundException("Team not found with id " + teamId));
 
         var user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));

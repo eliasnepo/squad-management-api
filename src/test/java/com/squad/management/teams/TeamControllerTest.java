@@ -19,8 +19,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = TeamController.class)
@@ -80,5 +80,25 @@ public class TeamControllerTest {
         assertEquals(response, mapper.writeValueAsString(expectedResponse));
 
         verify(retrieveTeamService, times(1)).getTeamById(TeamFactory.getTeamWithoutTeamLead().getId());
+    }
+
+    @Test
+    @DisplayName("should assign user to a team")
+    void test3() throws Exception {
+
+        doNothing().when(assignUserService).assignUserToTeam(1L, 1L);
+
+        var request = post("/teams/1/assign-user/1")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        var response = mvc.perform(request)
+                .andExpect(
+                        status().isOk()
+                )
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+
+        assertEquals("", response);
+
+        verify(assignUserService, times(1)).assignUserToTeam(1L, 1L);
     }
 }
