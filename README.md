@@ -27,6 +27,17 @@ Regarding database modeling, we have a user entity that can be part of 0-N teams
 
 ![Database diagram](https://github.com/eliasnepo/squad-management-api/blob/main/docs/db-diagram.png)
 
+## Testing
+This repository follows the 'test slice' approach, where our services are tested until the database without loading the entire Spring Container through the annotation @DataJpaTest. Our Rest APIs test will use @WebMvcTest so we don't need to load the persistence layer. We mock the services in our API testing cause we just want to ensure that everything is working correctly at infrastructure layer.
+Rest API tests:
+  - Testing if we're mapping url/verb correctly
+  - Testing if we're properly converting objects to/from the services and doing basic validations with Jakarta
+  - Testing if we're cordinating to the right services
+
+Service tests:
+  - Testing the whole behavior until hitting the database
+  - Testing persistence
+
 ## Suggestions and points of improvements:
   - Stop using 'Developer' as the default role, it doesn't make sense to use a default role and we should pass when assigning a user to a team;
   - Make custom annotation that already make the constraint validations at DTO, so we don't need to do a insert operation and be blocked by a constraint database.
