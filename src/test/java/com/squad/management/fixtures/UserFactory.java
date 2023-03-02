@@ -14,4 +14,15 @@ public class UserFactory {
                 "United States"
         );
     }
+
+    public static User getUserWithoutId() {
+        return new User(
+                null,
+                "John",
+                "Doe",
+                "jdoe",
+                "https://github.com/jdoe/profile.png",
+                "United States"
+        );
+    }
 }
